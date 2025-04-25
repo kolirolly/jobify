@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Assistant</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', path='/style.css') }}">
+</head>
+<body class="bg-gray-100 font-sans">
+  <nav class="flex items-center justify-between p-6 bg-white shadow-md">
+    <div class="flex items-center space-x-2">
+      <span class="text-blue-600 text-2xl">📋</span>
+      <span class="text-xl font-bold">Job Assistant</span>
+    </div>
+    <div class="space-x-6 text-gray-600">
+      <a href="#" class="hover:text-blue-600">Home</a>
+      <a href="#" class="hover:text-blue-600">Features</a>
+      <a href="#" class="hover:text-blue-600">Upload CV</a>
+      <a href="#" class="hover:text-blue-600">Dashboard</a>
+    </div>
+  </nav>
+
+  <main class="flex flex-col items-center justify-center min-h-screen p-6 text-center">
+    <h1 class="text-5xl font-bold text-gray-900">AI-Powered Job Assistant Tool</h1>
+    <p class="mt-4 text-lg text-gray-600">Enhance your job search with personalized guidance and insights.</p>
+    <button id="uploadButton" class="mt-8 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+      Upload Your Resume
+    </button>
+
+    <div id="uploadModal" class="fixed w-full h-full bg-gray-900 bg-opacity-50 z-50 hidden items-center justify-center">
+      <div id="modalContent" class="bg-white rounded-lg shadow-lg w-full max-w-md"></div>
+    </div>
+
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl w-full">
+      <div class="p-6 bg-white shadow-md rounded-lg">
+        <div class="flex justify-center mb-4">
+          <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h10a2 2 0 012 2v12a2 2 0 01-2 2z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900">CV Feedback</h3>
+        <p class="mt-2 text-gray-600">Receive personalized suggestions to improve your resume.</p>
+      </div>
+      <div class="p-6 bg-white shadow-md rounded-lg">
+        <div class="flex justify-center mb-4">
+          <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900">Job Search</h3>
+        <p class="mt-2 text-gray-600">Discover relevant job opportunities based on your profile.</p>
+      </div>
+      <div class="p-6 bg-white shadow-md rounded-lg">
+        <div class="flex justify-center mb-4">
+          <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0-1.1.9-2 2-2s2 .9 2 2-2 2-2 2-2-.9-2-2zm0 0V7m0 5v3m-9-6h18M5 5h14a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900">Tailored Practice Plans</h3>
+        <p class="mt-2 text-gray-600">Get customized interview preparation plans to boost your confidence.</p>
+      </div>
+    </div>
+  </main>
+
+  <script src="{{ url_for('static',path='/script.js') }}">
+  </script>
+</body>
+</html>
