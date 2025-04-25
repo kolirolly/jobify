@@ -7,10 +7,13 @@ from v1.routes import upload_pdf
 app = FastAPI()
 
 app.include_router(upload_pdf.router)
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/static", StaticFiles(directory="./static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
 @app.get("/", response_class=HTMLResponse)
 def read_root(request: Request):
-    return templates.TemplateResponse("upload.html", {"request": request})
+    return templates.TemplateResponse("home.html", {"request": request})
 
+@app.get("/upload_resume")
+def upload_resume(resquest:Request):
+    return templates.TemplateResponse("upload-resume.html",{"request":resquest})
