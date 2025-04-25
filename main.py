@@ -9,4 +9,14 @@ templates = Jinja2Templates(directory="templates")
 
 @app.get("/", response_class=HTMLResponse)
 def read_root(request: Request):
-    return templates.TemplateResponse("upload.html", {"request": request})
+    return templates.TemplateResponse("landing.html", {"request": request})
+
+@app.get("/upload_resume")
+def resume_upload_template(resquest:Request):
+    return templates.TemplateResponse("upload-resume.html",{"request":resquest})
+
+@app.get("/feedback")
+def feedback_form(resquest:Request):
+    return templates.TemplateResponse("feedback.html",{"request":resquest})
+
+    
