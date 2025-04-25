@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function() {
       const uploadButton = document.getElementById('uploadButton');
       const uploadModal = document.getElementById('uploadModal');
@@ -54,7 +53,6 @@ document.addEventListener('DOMContentLoaded', function() {
                           // Handle the successful upload (e.g., show a success message)
                           alert('File uploaded successfully!');
                           uploadModal.classList.add('hidden');
-                          load_feedback()
                           
                         
                         })
@@ -89,21 +87,3 @@ document.addEventListener('DOMContentLoaded', function() {
           });
       });
     });
-
-
-function load_feedback() {
-
-  const modalContent = document.getElementById('modalContent');
-  const uploadModal = document.getElementById('uploadModal');
-  console.log("hello");
-  
-
-  fetch('/feedback')
-          .then(response => response.text())
-          .then(data => {
-            modalContent.innerHTML = data;
-            uploadModal.classList.add('flex');
-            uploadModal.classList.remove('hidden')
-          })
-
-}
