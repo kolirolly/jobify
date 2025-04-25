@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Assistant</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="{{ url_for('static', path='/style.css') }}">
+</head>
+{% block content %}
+<body class="font-sans min-h-screen transition-opacity duration-500 opacity-100">
+  <nav class="flex justify-between items-center px-6 py-4 bg-gray-900 text-white sticky top-0 z-10 backdrop-blur">
+    <div class="flex items-center space-x-2 logo">
+      <span class="text-2xl font-bold text-[#00ffcc] font-['Orbitron']">JOBIFY</span>
+      <button id="menuBtn" class="text-[#00ffcc] md:hidden">☰</button>
+    </div>
+    <ul class="hidden md:flex space-x-6 text-gray-300 items-center">
+      <li><a href="#" class="nav-link">Home</a></li>
+      <li><a href="#" class="nav-link">Features</a></li>
+      <li><a href="#uploadModal" class="nav-link">Upload CV</a></li>
+      <li><a href="#" class="nav-link">Dashboard</a></li>
+      <li><button onclick="logoutUser()" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded">Logout</button></li>
+    </ul>
+  </nav>
+
+  <div id="sidebar" class="sidebar fixed top-16 left-0 w-64 h-[calc(100vh-64px)] bg-gray-900 backdrop-blur p-4 transform -translate-x-full transition-transform duration-300">
+    <ul class="space-y-4 text-gray-300">
+      <li><a href="#" class="nav-link">Home</a></li>
+      <li><a href="#" class="nav-link">Features</a></li>
+      <li><a href="#uploadModal" class="nav-link">Upload CV</a></li>
+      <li><a href="#" class="nav-link">Dashboard</a></li>
+      <li><button onclick="logoutUser()" class="text-red-500">Logout</button></li>
+    </ul>
+  </div>
+
+  <main class="container mx-auto mt-16 text-center" id="mainContent">
+    <h1 class="text-5xl font-bold text-[#00ffcc] font-['Orbitron']">AI-Powered Job Assistant Tool</h1>
+    <p class="mt-4 text-lg text-gray-400">Enhance your job search with personalized guidance and insights.</p>
+    <button id="uploadButton" class="mt-8 btn-neon">Upload Your Resume</button>
+
+    <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <div class="card">
+        <div class="w-12 h-12 mx-auto mb-4 text-[#00ffcc]">📝</div>
+        <h3 class="text-xl font-semibold text-white">CV Feedback</h3>
+        <p class="mt-2 text-gray-400">Receive personalized suggestions to improve your resume.</p>
+      </div>
+      <div class="card">
+        <div class="w-12 h-12 mx-auto mb-4 text-[#00ffcc]">🔍</div>
+        <h3 class="text-xl font-semibold text-white">Job Search</h3>
+        <p class="mt-2 text-gray-400">Discover relevant job opportunities based on your profile.</p>
+      </div>
+      <div class="card">
+        <div class="w-12 h-12 mx-auto mb-4 text-[#00ffcc]">📋</div>
+        <h3 class="text-xl font-semibold text-white">Tailored Practice Plans</h3>
+        <p class="mt-2 text-gray-400">Get customized interview preparation plans to boost your confidence.</p>
+      </div>
+    </div>
+  </main>
+
+  <div id="uploadModal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-80 flex items-center justify-center z-50">
+    <div id="modalContent" class="modal-content bg-[rgba(255,255,255,0.05)] backdrop-blur border border-[rgba(255,255,255,0.1)] rounded-lg p-6 w-full max-w-md">
+      <h3 class="text-2xl font-semibold text-[#00ffcc]">Upload Your Resume</h3>
+    </div>
+  </div>
+
+  <!-- Firebase Logout Functionality -->
+  <script type="module" src="{{ url_for('static', path='/login.js') }}">
+
+  </script>
+
+  <script src="{{ url_for('static', path='/script.js') }}" defer></script>
+  {% endblock %}
+</body>
+</html>
