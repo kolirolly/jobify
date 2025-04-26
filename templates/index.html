@@ -129,7 +129,7 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
 
-    import { firebaseConfig } from './env.js';
+    import { firebaseConfig } from '/static/env.js';
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
@@ -140,7 +140,7 @@
       const password = document.getElementById("password").value;
 
       signInWithEmailAndPassword(auth, email, password)
-        .then(() => window.location.href = "landing.html")
+        .then(() => window.location.href = "landing")
         .catch((error) => alert("Login failed: " + error.message));
     };
 
@@ -154,7 +154,7 @@
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           updateProfile(userCredential.user, { displayName: name })
-            .then(() => window.location.href = "landing.html")
+            .then(() => window.location.href = "landing")
             .catch((error) => alert("Profile update failed: " + error.message));
         })
         .catch((error) => alert("Signup failed: " + error.message));
@@ -162,7 +162,7 @@
 
     window.googleLogin = () => {
       signInWithPopup(auth, provider)
-        .then(() => window.location.href = "landing.html")
+        .then(() => window.location.href = "landing")
         .catch((error) => alert("Google Login failed: " + error.message));
     };
 
@@ -222,5 +222,7 @@
       <div onclick="googleLogin()"><i class="fab fa-google"></i> Google</div>
     </div>
   </form>
+  <script src="{{ url_for('static',path='/script.js') }}">
+  </script>
 </body>
 </html>

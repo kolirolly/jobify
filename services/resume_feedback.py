@@ -41,7 +41,7 @@ def get_resume_feedback(resume):
 
     response = chain.invoke({"resume": resume})
 
-    print(response.get("feedback",[]))
+    # print(response.get("feedback",[]))
 
     return response.get("feedback",[])
 
@@ -52,7 +52,6 @@ def apply_feedback(resume, feedback):
             "type": "Object",
             "properties": {
                 "updated_resume": {"type": "string"},
-                "questions": {"type": "array"},
             },
             "required": ["updated_resume"],
         }
@@ -66,24 +65,26 @@ def apply_feedback(resume, feedback):
                 You are a professional resume writer and AI assistant. Based on the feedback below, rewrite the given resume in Markdown format and
                 return the entire resume that follows a professional format.
 
-                - If any suggestion lacks enough detail to implement, ask specific and clear follow-up questions.
-                - Do not fabricate or assume information.
+                - Do not fabricate or assume information. If you do not have the required information refrain from applying the feedback
                 - Keep the formatting clean and ATS-friendly.
                 - Do not include any explanations, headings, or markdown code fences like ```json or ```markdown.
 
-                At the end, include a questions array in JSON format if only clarification is needed.
 
                 Input:
                 Feedback: {feedback}
                 Resume: {resume}
 
                 Respond with a JSON object in the following format only.
-                NOTE:STRICTLY FOLLOW THE FORMAT GIVE BELOW IF NO QUESTION ARE NEED SAY NO QUESTIONS:
+                NOTE:STRICTLY FOLLOW THE FORMAT GIVEN BELOW.IF YOU DO NOT KNOW ANY INFOMATION LEAVE IT BLANK AND DO NOT
+                IMPLEMENT THAT FEEDBACK.
 
+                You must respond with a pure JSON object like this:
+                OUTPUT FORMAT:
                 {{
-                  "updated_resume": "<resume rewritten in Markdown format>",
-                  "questions": ["<question 1>", "<question 2>", "..."]
+                "updated_resume": "..."
                 }}
+
+                Do not add any text outside the JSON object.
             """,
             )
         ]
@@ -96,8 +97,8 @@ def apply_feedback(resume, feedback):
     response = chain.invoke({"resume": resume, "feedback": feedback})
 
     print(response["updated_resume"])
-    print(response["questions"])
-
+    # print(response["questions"])
+    return response["updated_resume"]
 
 
 if __name__ == "__main__":
