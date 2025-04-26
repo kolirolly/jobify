@@ -133,6 +133,8 @@ document.addEventListener('DOMContentLoaded', function() {
     .then(response => response.json())
     .then(data => {
       console.log('Success:', data);
+      uploadModal.classList.add('hidden');
+      download_file(data.filename);
       // Handle the API response here (e.g., show a success message)
     })
     .catch((error) => {
@@ -142,3 +144,22 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
           }
+
+
+function download_file(path) {
+  const uploadModal = document.getElementById('uploadModal');
+      const modalContent = document.getElementById('modalContent');
+      fetch(`/download?path=${path}`)
+  .then(response => response.blob()) // get file as blob
+  .then(blob => {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = path.split('/').pop(); // or give a specific filename
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  });
+  
+}
