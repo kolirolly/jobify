@@ -2,24 +2,21 @@
   <h3 class="text-2xl font-semibold text-[#00ffcc] font-['Orbitron'] text-center mb-6">Select Your Preferences</h3>
 
   <form id="preferencesForm">
-    <div class="space-y-4">
+    <div class="space-y-4 max-h-48 overflow-y-auto pr-2">
+      {% for f in feedback %}
       <label class="flex items-center space-x-3 text-gray-300">
-        <input type="checkbox" class="form-checkbox h-5 w-5 text-[#00ffcc] border-gray-700 bg-gray-800 rounded focus:ring-[#00ffcc]" name="preference1">
-        <span>Receive job recommendations based on my skills</span>
+        <input
+          type="checkbox"
+          class="form-checkbox h-5 w-5 text-[#00ffcc] border-gray-700 bg-gray-800 rounded focus:ring-[#00ffcc]"
+          name="{{f}}"
+        />
+        <span>{{ f }}</span>
       </label>
-      <label class="flex items-center space-x-3 text-gray-300">
-        <input type="checkbox" class="form-checkbox h-5 w-5 text-[#00ffcc] border-gray-700 bg-gray-800 rounded focus:ring-[#00ffcc]" name="preference2">
-        <span>Get personalized CV optimization suggestions</span>
-      </label>
-      <label class="flex items-center space-x-3 text-gray-300">
-        <input type="checkbox" class="form-checkbox h-5 w-5 text-[#00ffcc] border-gray-700 bg-gray-800 rounded focus:ring-[#00ffcc]" name="preference3">
-        <span>Enroll in tailored interview preparation plans</span>
-      </label>
-      <label class="flex items-center space-x-3 text-gray-300">
-        <input type="checkbox" class="form-checkbox h-5 w-5 text-[#00ffcc] border-gray-700 bg-gray-800 rounded focus:ring-[#00ffcc]" name="preference4">
-        <span>Receive weekly job market insights and updates</span>
-      </label>
+      {% endfor %}
     </div>
 
-    <button type="submit" class="w-full mt-8 btn-neon">Submit Preferences</button>
+    <button type="submit" class="w-full mt-8 btn-neon">
+      Submit Preferences
+    </button>
   </form>
+</div>

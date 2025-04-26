@@ -49,10 +49,11 @@ document.addEventListener('DOMContentLoaded', function() {
                           return response.json();
                         })
                         .then(data => {
-                        //   console.log('Upload successful:', data);
+                          console.log('Upload successful:', data);
                           // Handle the successful upload (e.g., show a success message)
                           alert('File uploaded successfully!');
                           uploadModal.classList.add('hidden');
+                          feedback(data.filename)
                           
                         
                         })
@@ -87,3 +88,57 @@ document.addEventListener('DOMContentLoaded', function() {
           });
       });
     });
+
+
+    function feedback(id) {
+      const uploadModal = document.getElementById('uploadModal');
+      const modalContent = document.getElementById('modalContent');
+      fetch(`/feedback?path=${id}`)
+          .then(response => response.text())
+          .then(data => {
+            modalContent.innerHTML = data;
+            uploadModal.classList.add('flex');
+            uploadModal.classList.remove('hidden');
+            // document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('preferencesForm');
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    const selectedPreferences = [];
+    const checkboxes = form.querySelectorAll('input[type="checkbox"]:checked');
+
+    checkboxes.forEach(function(checkbox) {
+      selectedPreferences.push(checkbox.name); // Assuming the 'name' attribute holds the preference value
+    });
+
+    // Now you have an array 'selectedPreferences' containing the names
+    // of all the checked checkboxes.
+
+    // You can now send this array to your API using a fetch request or
+    // any other method you prefer.
+
+    console.log("Selected Preferences:", selectedPreferences);
+    console.log(JSON.stringify({path:id, preferences: selectedPreferences }));
+    
+
+    // Example of how you might send this to an API using fetch:
+    fetch('/apply_feedback', {
+      method: 'POST',
+       headers: {
+    'Content-Type': 'application/json'
+  },
+      body: JSON.stringify({path:id, preferences: selectedPreferences }),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+      // Handle the API response here (e.g., show a success message)
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+      // Handle any errors that occurred during the API call
+    });
+  });
+});
+          }
