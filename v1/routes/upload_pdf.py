@@ -16,7 +16,7 @@ async def create_upload_file(file: UploadFile):
     path = "uploads"
     os.makedirs(path, exist_ok=True)
     content = await file.read()
-    with open(f"{path}/{id}","wb") as f:
-        f.write(content)
     text = await resume_parser.extract_text(content)
-    return {"filename": text}
+    with open(f"{path}/{id}.md","w") as f:
+        f.write(text)
+    return {"filename": id}
