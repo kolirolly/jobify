@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Request, UploadFile, Form,HTTPException
+from fastapi import File
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
@@ -7,6 +8,7 @@ from services.resume_feedback import get_resume_feedback,apply_feedback
 from services.convert_to_markdown import markdown_to_pdf
 from v1.routes import upload_pdf
 import os
+from core.job_fetcher import extract_text_from_docx, extract_text_from_pdf, extract_skills, search_jobs_adzuna
 from pydantic import BaseModel
 
 
@@ -52,7 +54,6 @@ def apply_feedback_(payload: FeedbackRequest):
     with open(f"uploads/{path}.md") as f:
         updated_resume = apply_feedback(f.read(), selected_preferences)
         os.makedirs("pdfs", exist_ok=True)
-        # print("hehe",updated_resume)
         if markdown_to_pdf(updated_resume,f"pdfs/{path}.pdf"):
             return {"filename": f"pdfs/{path}.pdf"}
         else:
@@ -66,3 +67,22 @@ def download_resume(path:str):
     return FileResponse(
         path, media_type="application/pdf", filename=os.path.basename(path)
     )
+
+@app.post("/job-search")
+async def upload_resume(file: UploadFile = File(...), location: str = Form("Remote")):
+    content = await file.read()
+    if file.filename.endswith(".pdf"):
+        text = extract_text_from_pdf(content)
+    elif file.filename.endswith(".docx"):
+        text = extract_text_from_docx(content)
+    else:
+        return {"error": "Unsupported file type"}
+
+    skills = extract_skills(text)
+    jobs = search_jobs_adzuna(skills, location=location)
+    return {"skills": skills, "jobs": jobs}
+
+@app.get("/job-search1")
+def something(request:Request):
+    return templates.TemplateResponse("jobsearch.html",
+    {"request":request})
