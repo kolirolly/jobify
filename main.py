@@ -14,6 +14,7 @@ app = FastAPI()
 
 app.include_router(upload_pdf.router)
 app.mount("/static", StaticFiles(directory="./static"), name="static")
+app.mount("/js", StaticFiles(directory="/etc/secrets/"),name="js")
 templates = Jinja2Templates(directory="templates")
 
 @app.get("/", response_class=HTMLResponse)
