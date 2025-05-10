@@ -1,0 +1,22 @@
+<div class="bg-[rgba(255,255,255,0.05)] backdrop-blur border border-[rgba(255,255,255,0.1)] rounded-lg p-8 w-full max-w-lg">
+  <h3 class="text-2xl font-semibold text-[#00ffcc] font-['Orbitron'] text-center mb-6">Select Your Preferences</h3>
+
+  <form id="preferencesForm">
+    <div class="space-y-4 max-h-48 overflow-y-auto pr-2">
+      {% for f in feedback %}
+      <label class="flex items-center space-x-3 text-gray-300">
+        <input
+          type="checkbox"
+          class="form-checkbox h-5 w-5 text-[#00ffcc] border-gray-700 bg-gray-800 rounded focus:ring-[#00ffcc]"
+          name="{{f}}"
+        />
+        <span>{{ f }}</span>
+      </label>
+      {% endfor %}
+    </div>
+
+    <button type="submit" class="w-full mt-8 btn-neon">
+      Submit Preferences
+    </button>
+  </form>
+</div>

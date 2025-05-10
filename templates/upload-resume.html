@@ -1,0 +1,22 @@
+<div class="bg-[rgba(255,255,255,0.05)] backdrop-blur border border-[rgba(255,255,255,0.1)] rounded-lg p-8 w-full max-w-md">
+    <h3 class="text-2xl font-semibold text-[#00ffcc] font-['Orbitron'] text-center mb-6">Upload Your Resume</h3>
+
+    <div class="drop-zone text-center border-2 border-dashed border-[#00ffcc] rounded-lg p-6 bg-[rgba(255,255,255,0.02)]">
+      <svg class="w-12 h-12 mx-auto text-[#00ffcc] mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" id="uploadIcon">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9 argument 9 9 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+      </svg>
+      <p class="text-gray-400 mb-2" id="dragDropText">Drag and drop your file or</p>
+      <label class="inline-block mt-2 btn-neon cursor-pointer">
+        Browse Files
+        <input type="file" class="hidden" accept=".pdf,.docx" id="fileInput" name="resume">
+      </label>
+      <p class="text-sm text-gray-500 mt-2">PDF or DOCX, max 10MB</p>
+      <p class="text-[#00ffcc] text-sm mt-2 hidden" id="fileName">No file selected</p>
+    </div>
+
+    <p class="text-gray-500 text-sm text-center mt-6">Your data is encrypted and secure</p>
+
+    <form id="uploadForm">
+      <button type="submit" class="w-full mt-6 btn-neon">Upload</button>
+    </form>
+</div>
